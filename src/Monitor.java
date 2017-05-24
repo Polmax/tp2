@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package source;
+//package source;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -26,14 +26,16 @@ public class Monitor{
         
         
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws UnknownHostException, SocketException, IOException{
+        long pingInicialProxy ;
+     
+        pingInicialProxy = initPing(args[0],5555);
         
     }
-    public long initPing(String ips,int port) throws UnknownHostException, SocketException, IOException{
+    public static long initPing(String ips,int port) throws UnknownHostException, SocketException, IOException{
         long rttinicial, tempoPartida=0, tempoChegada=0;
         InetAddress ip = InetAddress.getByName(ips);
-        
-        DatagramSocket socket = new DatagramSocket(port,ip);
+        DatagramSocket socket = new DatagramSocket();
         String str="pingi";
         byte[] buffer = new byte[10];
         buffer = str.getBytes();
