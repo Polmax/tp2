@@ -40,7 +40,7 @@ public class Proxy {
         else {
         String[] arrayEstado = pacoteRecebido.split("/");
         if(!listaMonitores.containsKey(pacoteEstado.getAddress())){
-            System.out.println("n existe");
+            System.out.println("Novo monitor");
                 InfoMonitor novoMonitor = new InfoMonitor(pacoteEstado.getAddress(),timestamp,Long.parseLong(arrayEstado[0]),Integer.parseInt(arrayEstado[1]),Integer.parseInt(arrayEstado[2]));
                 listaMonitores.put(pacoteEstado.getAddress(), novoMonitor);
                 listaMonitores.get(pacoteEstado.getAddress()).carga();
@@ -48,17 +48,19 @@ public class Proxy {
                 p.start();
             }
             else{
-            System.out.println("Ja existe");
+            System.out.println("Monitor Existente");
                 listaMonitores.get(pacoteEstado.getAddress()).setnLigacoes(Integer.parseInt(arrayEstado[2]));
                 listaMonitores.get(pacoteEstado.getAddress()).setPacotesPerdidos(Integer.parseInt(arrayEstado[1]));
                 listaMonitores.get(pacoteEstado.getAddress()).setRttm(Long.parseLong(arrayEstado[0]));
                 listaMonitores.get(pacoteEstado.getAddress()).setTimestamp(timestamp);
                 listaMonitores.get(pacoteEstado.getAddress()).carga();
             }
-            
+        /*
             for(InfoMonitor a: listaMonitores.values()){
                 System.out.println("Ip: "+ a.getIp() + " Carga = " + a.getCarga() + "%");
             }
+      
+         */
         }
         
         //System.out.println("carga = " + (listaMonitores.get(0).carga()) + "%");

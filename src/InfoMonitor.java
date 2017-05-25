@@ -35,6 +35,7 @@ public class InfoMonitor {
     
     
     public int carga(){
+        carga = 0;
         if(this.nLigacoes>=5){this.carga=100; return 1;}
         if(this.rttm>=300) {this.carga=100; return 1;}
         if(this.rttm>300) {this.carga=100; return 1;}
