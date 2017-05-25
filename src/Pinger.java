@@ -7,15 +7,16 @@
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
 /**
  *
  * @author core
  */
 public class Pinger extends Thread{
-    int id; //id utilizado para saber qual o monitor 
-    public Pinger(int id){
-        this.id=id;
+    InetAddress id; //id utilizado para saber qual o monitor 
+    public Pinger(InetAddress ipid){
+        this.id=ipid;
     }
     
     @Override
@@ -23,13 +24,16 @@ public class Pinger extends Thread{
         DatagramSocket socket ;
         DatagramPacket ping ;
         try {
-            socket = new DatagramSocket(5555,Proxy.listaMonitores.get(this.id).ip);
+            socket = new DatagramSocket();
             String str="pingp";
             byte[] buffer = new byte[64];
             buffer = str.getBytes();
-            ping = new DatagramPacket(buffer, buffer.length, Proxy.listaMonitores.get(id).ip, 5555);
+            socket.setSoTimeout(1000);
+            while(true){
+            ping = new DatagramPacket(buffer, buffer.length, Proxy.listaMonitores.get(id).getIp(), 5555);
             try {
                 socket.send(ping);
+                System.out.println("Ping enviado para "+this.id + "Mensagem "+str);
             } catch (IOException ex) {
                 System.out.println(ex);
             }
@@ -39,6 +43,7 @@ public class Pinger extends Thread{
                 System.out.println(e);
             }
             System.out.println(buffer.toString());
+            }
         } catch (SocketException ex) {
             System.out.println(ex);
         }
