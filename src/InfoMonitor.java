@@ -138,6 +138,9 @@ public class InfoMonitor {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+    public void somaPP(){
+        this.pacotesPerdidos++;
+    }
     
     
     
