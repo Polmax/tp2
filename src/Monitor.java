@@ -81,7 +81,7 @@ public class Monitor {
         socket.send(ping);
         
         try {
-            socket.setSoTimeout(10000);
+            socket.setSoTimeout(1000);
             socket.receive(ping);
             calendario = Calendar.getInstance();
             tempoChegada= calendario.getTimeInMillis();
